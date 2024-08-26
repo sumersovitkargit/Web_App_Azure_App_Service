@@ -15,8 +15,8 @@ variable "sql_administrator_login" {
 }
 
 variable "sql_administrator_login_password" {
-  description = "The administrator password of the SQL server."
-  type        = sensitive(string)
+  description = "The administrator password of the SQL server"
+  type        = string
 }
 
 variable "rg_name" {
