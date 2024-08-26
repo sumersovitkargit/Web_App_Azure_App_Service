@@ -14,4 +14,4 @@ subnets = [
   { name = "aks_subnet", address_prefixes = ["10.0.0.0/24"], service_endpoints = ["Microsoft.Sql"] }
 ]
 
-sql_administrator_login_password = "Nissan@1605
+sql_administrator_login_password = "Nissan@1605"
