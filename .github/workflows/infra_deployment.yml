@@ -5,10 +5,17 @@
 
 name: Infrastructure Deploy workflow
 
-on: 
-  push:
-    branches: [ "task1_terraform" ]
+on:
+  # Trigger workflow manually
   workflow_dispatch:
+    # Define inputs required for the workflow
+    inputs:
+      # Input for environment selection
+      environment-name:
+        type: choice  # Input type is a choice dropdown
+        description: 'Environment'  # Description for user guidance
+        required: true  # Input is mandatory
+        options: ['dev']  # Available environment choices
   
 # run-name: Deploy
 jobs:
@@ -89,3 +96,5 @@ jobs:
           working-directory: ./Terraform_task1
           run: |
             az logout
+
+

@@ -58,3 +58,12 @@ module "virtualnetwork" {
 }
 
 
+module "sql_server_module" {
+  source = "./modules/sql"
+  depends_on = [module.resourcegroup]
+  base_name                      = "solunist"
+  rg_name                        = module.resourcegroup.resource_group_name
+  location                       = var.azure_region
+  sql_administrator_login        = "adminuser"
+  sql_administrator_login_password = var.sql_administrator_login_password
+}
