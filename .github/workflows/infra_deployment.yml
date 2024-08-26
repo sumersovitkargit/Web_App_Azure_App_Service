@@ -27,19 +27,9 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
           submodules: true
 
-  # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-  env-setup:
-    needs: [checkout]
-    runs-on: self-hosted
-    steps:
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
   # Adding login creds
   login:
-    needs: [checkout, env-setup]
+    needs: [checkout]
     runs-on: self-hosted
     steps:
       - name: Az login
@@ -48,7 +38,7 @@ jobs:
           az account set --subscription ${{ secrets.SUBSCRIPTION_ID }}
   # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
   terraform-init:
-    needs: [checkout, env-setup, login]
+    needs: [checkout,  login]
     runs-on: self-hosted
     env:
        ARM_CLIENT_ID: "${{ secrets.CLIENT_ID }}"
@@ -62,7 +52,7 @@ jobs:
 
   # Generates an execution plan for Terraform
   terraform-plan:
-    needs: [checkout, env-setup, terraform-init]
+    needs: [checkout, terraform-init]
     runs-on: self-hosted
     env:
        ARM_CLIENT_ID: "${{ secrets.CLIENT_ID }}"
@@ -77,7 +67,7 @@ jobs:
          
   # On push to "main", build or change infrastructure according to Terraform configuration files
   terraform-apply:
-     needs: [checkout, env-setup, terraform-init, terraform-plan]
+     needs: [checkout, terraform-init, terraform-plan]
      runs-on: self-hosted
      env:
        ARM_CLIENT_ID: "${{ secrets.CLIENT_ID }}"
@@ -89,7 +79,7 @@ jobs:
          working-directory: ./Terraform_task1
          run: terraform apply --input=false -auto-approve --var-file=./vars/terraform.tfvars
   post-cleanup:
-      needs: [checkout, env-setup, terraform-init, terraform-plan, terraform-apply]
+      needs: [checkout, terraform-init, terraform-plan, terraform-apply]
       runs-on: self-hosted
       steps:
         - name: CleanUp
