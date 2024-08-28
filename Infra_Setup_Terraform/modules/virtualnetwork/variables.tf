@@ -40,7 +40,3 @@ variable "subnets" {
   description = "List of objects that represent the configuration of each subnet."
 }
 
-variable "sql_administrator_login_password" {
-  description = "The administrator password of the SQL server"
-  type        = string
-}
