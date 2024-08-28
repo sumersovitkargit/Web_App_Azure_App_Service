@@ -48,6 +48,7 @@ module "virtualnetwork" {
   source     = "./modules/virtualnetwork"
   rg_name    = module.resourcegroup.resource_group_name
   region     = var.region
+  address_space       = var.address_space
   #purpose    = var.purpose
   env        = var.env
   subnets    = var.subnets
