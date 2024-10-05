@@ -11,64 +11,72 @@ on:
 
 jobs:
   checkout:
-    runs-on: self-hosted
+    runs-on: self-hosted  # Use a self-hosted runner for Terraform execution
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
           submodules: true  # Ensures any submodules are checked out
 
   login:
-    needs: [checkout]
     runs-on: self-hosted
+    needs: checkout  # Ensure checkout is completed first
     steps:
       - name: Azure Login
         run: |
-          az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
+          az login --service-principal \
+            -u ${{ secrets.CLIENT_ID }} \
+            -p ${{ secrets.CLIENT_SECRET }} \
+            --tenant ${{ secrets.TENANT_ID }}
           az account set --subscription ${{ secrets.SUBSCRIPTION_ID }}
 
   terraform-init:
-    needs: [checkout, login]
     runs-on: self-hosted
+    needs: [checkout, login]  # Dependencies
     env:
-      ARM_CLIENT_ID: "${{ secrets.CLIENT_ID }}"
-      ARM_SUBSCRIPTION_ID: "${{ secrets.SUBSCRIPTION_ID }}"
-      ARM_TENANT_ID: "${{ secrets.TENANT_ID }}"
-      ARM_CLIENT_SECRET: "${{ secrets.CLIENT_SECRET }}"
+      ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
     steps:
       - name: Terraform Init
-        working-directory: ./Infra_Setup_Terraform
-        run: terraform init -backend-config="storage_account_name=tfstatessolunistresearch" -backend-config="container_name=tfstate" -backend-config="key=terraform.tfstate"
+        working-directory: ./Infra_Setup_Terraform  # Adjust directory as necessary
+        run: |
+          terraform init \
+            -backend-config="storage_account_name=tfstatessolunistresearch" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=terraform.tfstate"
 
   terraform-plan:
-    needs: [checkout, terraform-init]
     runs-on: self-hosted
+    needs: terraform-init
     env:
-      ARM_CLIENT_ID: "${{ secrets.CLIENT_ID }}"
-      ARM_SUBSCRIPTION_ID: "${{ secrets.SUBSCRIPTION_ID }}"
-      ARM_TENANT_ID: "${{ secrets.TENANT_ID }}"
-      ARM_CLIENT_SECRET: "${{ secrets.CLIENT_SECRET }}"
+      ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
     steps:
       - name: Terraform Plan
         working-directory: ./Infra_Setup_Terraform
         run: terraform plan --var-file=vars/terraform.tfvars
 
   terraform-apply:
-    needs: [checkout, terraform-init, terraform-plan]
     runs-on: self-hosted
+    needs: terraform-plan
     env:
-      ARM_CLIENT_ID: "${{ secrets.CLIENT_ID }}"
-      ARM_SUBSCRIPTION_ID: "${{ secrets.SUBSCRIPTION_ID }}"
-      ARM_TENANT_ID: "${{ secrets.TENANT_ID }}"
-      ARM_CLIENT_SECRET: "${{ secrets.CLIENT_SECRET }}"
+      ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
     steps:
       - name: Terraform Apply
         working-directory: ./Infra_Setup_Terraform
         run: terraform apply --input=false -auto-approve --var-file=vars/terraform.tfvars
 
   post-cleanup:
-    needs: [checkout, terraform-init, terraform-plan, terraform-apply]
     runs-on: self-hosted
+    needs: terraform-apply
     steps:
-      - name: Clean Up
+      - name: Azure Logout and Clean Up
         run: |
           az logout

@@ -1,17 +1,6 @@
-
-#commit5
-# Common
-region = "Central India"
-azure_region = "Central India"
-env = "webapp_appservoce"
-tenant_id = "ab968060-1bea-4e12-ba68-c8579dd00e75"
-
-# tags
-
-# VNET
-address_space = ["10.0.0.0/16"]
-subnets = [
-  { name = "aks_subnet", address_prefixes = ["10.0.0.0/24"], service_endpoints = ["Microsoft.Sql"] }
-]
-
-sql_administrator_login_password = "Nissan@1605"
+resource_group_name = "MyResourceGroup"
+location            = "East US"
+tags = {
+  Environment = "Dev"
+  Owner       = "Solunist_Research_WebApp"
+}
