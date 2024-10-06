@@ -24,9 +24,9 @@ jobs:
     steps:
       - name: Azure Login
         run: |
-          az login --service-principal \
-            -u ${{ secrets.CLIENT_ID }} \
-            -p ${{ secrets.CLIENT_SECRET }} \
+          az login --service-principal `
+            -u ${{ secrets.CLIENT_ID }}`
+            -p ${{ secrets.CLIENT_SECRET }}`
             --tenant ${{ secrets.TENANT_ID }}
           az account set --subscription ${{ secrets.SUBSCRIPTION_ID }}
 
