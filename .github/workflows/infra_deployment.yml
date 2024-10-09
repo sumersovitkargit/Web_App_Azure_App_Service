@@ -39,10 +39,7 @@ jobs:
       - name: Terraform Init
         working-directory: ./Infra_Setup_Terraform  # Adjust directory as necessary
         run: |
-          terraform init \
-            -backend-config="storage_account_name=tfstatessolunistresearch" \
-            -backend-config="container_name=tfstate" \
-            -backend-config="key=terraform.tfstate"
+          terraform init -backend-config="storage_account_name=tfstatessolunistresearch" -backend-config="container_name=tfstate" -backend-config="key=terraform.tfstate"
 
   terraform-plan:
     runs-on: self-hosted
