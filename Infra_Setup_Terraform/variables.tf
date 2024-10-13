@@ -42,16 +42,11 @@ variable "sku_tier" {
   type        = string
 }
 
-# Optional Variables
-variable "app_service_environment_id" {
-  description = "The ID of the App Service Environment."
-  type        = string
-  default     = I1
-}
+
 
 
 variable "tags_asp" {
-  description = "A mapping of tags for the App Service Plan."
+  description = "A mapping of tags which should be assigned to the AppService."
   type        = map(string)
   default     = {}
 }
