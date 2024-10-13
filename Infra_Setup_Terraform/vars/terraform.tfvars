@@ -11,6 +11,6 @@ tags = {
 app_service_plan_name         = "my-app-service-plan"
 os_type                       = "Windows"
 sku_name                      = "S1"
-sku_tier                      = "Standard"
+#sku_tier                      = "Standard"
 
 tags_asp             = { Owner = "Sumer" }
