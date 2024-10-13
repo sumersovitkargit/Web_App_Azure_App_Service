@@ -24,20 +24,12 @@ variable "app_service_plan_name" {
   type        = string
 }
 
-variable "location" {
-  description = "The Azure Region where the App Service Plan will be created."
-  type        = string
-}
 
 variable "os_type" {
   description = "The O/S type for the App Services to be hosted in this plan."
   type        = string
 }
 
-variable "resource_group_name" {
-  description = "The name of the Resource Group where the App Service Plan should exist."
-  type        = string
-}
 
 variable "sku_name" {
   description = "The SKU name for the App Service Plan."
@@ -80,7 +72,7 @@ variable "zone_balancing_enabled" {
   default     = null
 }
 
-variable "tags" {
+variable "tags_asp" {
   description = "A mapping of tags for the App Service Plan."
   type        = map(string)
   default     = {}
