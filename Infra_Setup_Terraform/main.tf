@@ -19,7 +19,7 @@ terraform {
 
 # Call the central module for Resource Group creation
 module "resource_group" {
-  source  = "solunistacr.azurecr.io/terraform-modules/resource-group:1.0.0"
+  source = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//Resource_group?ref=main"
   
   # Module variables
   resource_group_name = var.resource_group_name
