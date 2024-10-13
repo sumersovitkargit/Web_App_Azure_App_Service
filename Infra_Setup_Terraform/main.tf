@@ -32,14 +32,14 @@ module "resource_group" {
 
 module "app_service_plan" {
   source = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//App_Service_Plan?ref=main"
-
+  depends_on = [azurerm_resource_group.rg]
   # Mandatory variables
   name                = var.app_service_plan_name
   location            = var.location
   os_type             = var.os_type
   resource_group_name = var.resource_group_name
   sku_name            = var.sku_name
-  sku                 = { tier = var.sku_tier }
+  #sku                 = { tier = var.sku_tier }
   tags                         = var.tags_asp
  
 }
