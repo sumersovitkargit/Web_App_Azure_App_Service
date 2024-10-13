@@ -1,5 +1,5 @@
 resource_group_name = "MyResourceGroup"
-location            = "East US"
+location            = "Central India"
 tags = {
   Environment = "Dev"
   Owner       = "Solunist_Research_WebApp"
@@ -13,4 +13,4 @@ os_type                       = "Windows"
 sku_name                      = "S1"
 sku_tier                      = "Standard"
 
-tags_asp             = { Environment = "Production" }
+tags_asp             = { Owner = "Sumer" }
