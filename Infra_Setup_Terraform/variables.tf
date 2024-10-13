@@ -17,6 +17,7 @@ variable "tags" {
 }
 
 ## App service plan
+###################################################################
 # variables.tf
 
 variable "app_service_plan_name" {
@@ -45,32 +46,9 @@ variable "sku_tier" {
 variable "app_service_environment_id" {
   description = "The ID of the App Service Environment."
   type        = string
-  default     = null
+  default     = I1
 }
 
-variable "maximum_elastic_worker_count" {
-  description = "Maximum number of workers in an Elastic SKU Plan."
-  type        = number
-  default     = null
-}
-
-variable "worker_count" {
-  description = "The number of Workers (instances) to be allocated."
-  type        = number
-  default     = null
-}
-
-variable "per_site_scaling_enabled" {
-  description = "Enable per-site scaling."
-  type        = bool
-  default     = false
-}
-
-variable "zone_balancing_enabled" {
-  description = "Enable zone balancing for the App Service Plan."
-  type        = bool
-  default     = null
-}
 
 variable "tags_asp" {
   description = "A mapping of tags for the App Service Plan."
