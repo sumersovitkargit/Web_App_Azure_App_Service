@@ -4,7 +4,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = ">=3.0.0"
+      version = ">=4.0.0"
     }
   }
 
@@ -41,4 +41,5 @@ module "app_service_plan" {
   sku_name            = var.sku_name
   sku                 = { tier = var.sku_tier }
   tags                         = var.tags_asp
+ 
 }

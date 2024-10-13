@@ -13,8 +13,4 @@ os_type                       = "Windows"
 sku_name                      = "S1"
 sku_tier                      = "Standard"
 
-# Optional Variables
-worker_count                  = 2
-per_site_scaling_enabled      = true
-tags_asp                           = { Owner = "Sumer" }
-# Leave other optional variables out to use their defaults
+tags_asp             = { Environment = "Production" }
