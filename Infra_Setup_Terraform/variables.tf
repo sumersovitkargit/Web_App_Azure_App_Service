@@ -37,13 +37,6 @@ variable "sku_name" {
   type        = string
 }
 
-variable "sku_tier" {
-  description = "The SKU tier for the App Service Plan."
-  type        = string
-}
-
-
-
 
 variable "tags_asp" {
   description = "A mapping of tags which should be assigned to the AppService."
