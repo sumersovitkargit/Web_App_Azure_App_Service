@@ -16,7 +16,10 @@ terraform {
     key                   = "terraform.tfstate"
   }
 }
-
+# Provider configuration
+provider "azurerm" {
+  features {}
+}
 # Call the central module for Resource Group creation
 module "resource_group" {
   source = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//Resource_group?ref=main"
