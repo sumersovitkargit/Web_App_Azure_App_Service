@@ -47,5 +47,5 @@ module "app_service_plan" {
   worker_count                 = var.worker_count
   per_site_scaling_enabled     = var.per_site_scaling_enabled
   zone_balancing_enabled       = var.zone_balancing_enabled
-  tags                         = var.tags
+  tags                         = var.tags_asp
 }
