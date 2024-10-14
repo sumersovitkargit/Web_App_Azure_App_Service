@@ -39,7 +39,6 @@ module "app_service_plan" {
   os_type             = var.os_type
   resource_group_name = var.resource_group_name
   sku_name            = var.sku_name
-  #sku                 = { tier = var.sku_tier }
   tags                         = var.tags_asp
  
 }
