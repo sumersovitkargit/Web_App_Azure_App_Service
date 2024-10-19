@@ -64,12 +64,10 @@ module "sql_server" {
   name                         = var.sql_server_name
   resource_group_name          = module.resource_group.resource_group_name
   location                     = var.location
-  version                      = "12.0"
-
-
+  
   azuread_administrator {
     login                         = var.administrator_login
-    object_id                    = var.administrator_object_id
+    object_id                    =  var.administrator_object_id
     azuread_authentication_only   = true
   }
 }
