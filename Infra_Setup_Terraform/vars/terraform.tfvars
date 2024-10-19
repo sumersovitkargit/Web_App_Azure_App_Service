@@ -33,6 +33,6 @@ databases = {
   }
   "solunistdb2" = {
     collation = null
-    edition   = "Standard"
+    edition   = "S1"
   }
 }
