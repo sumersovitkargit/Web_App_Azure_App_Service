@@ -27,3 +27,13 @@ output "identity_principal_id" {
   description = "The principal ID of the User-Assigned Managed Identity."
   value       = module.user_assigned_identity.identity_principal_id
 }
+
+output "sql_server_id" {
+  description = "The ID of the Azure SQL Server."
+  value       = module.sql_server.sql_server_id
+}
+
+output "sql_server_fully_qualified_domain_name" {
+  description = "The fully qualified domain name of the SQL Server."
+  value       = module.sql_server.sql_server_fully_qualified_domain_name
+}

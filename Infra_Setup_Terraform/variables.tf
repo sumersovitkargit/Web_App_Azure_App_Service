@@ -64,3 +64,8 @@ variable "identity_name" {
   description = "The name of the Application Insights resource."
   type        = string
 }
+
+variable "sql_server_name" {
+  description = "The name of the Azure SQL Server."
+  type        = string
+}
