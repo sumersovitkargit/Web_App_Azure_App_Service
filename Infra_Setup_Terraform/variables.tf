@@ -89,8 +89,3 @@ variable "databases" {
   default = {}
 }
 
-variable "server_id" {
-  description = "The ID of the SQL Server where the databases will be created"
-  type        = string
-}
-
