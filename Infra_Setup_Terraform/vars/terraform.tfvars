@@ -14,3 +14,5 @@ sku_name                      = "S1"
 #sku_tier                      = "Standard"
 
 tags_asp             = { Owner = "Sumer" }
+
+app_service_name = "my-windows-web-app"

@@ -43,3 +43,9 @@ variable "tags_asp" {
   type        = map(string)
   default     = {}
 }
+
+##App Service
+variable "app_service_name" {
+  description = "The name of the Windows Web App"
+  type        = string
+}
