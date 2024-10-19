@@ -37,3 +37,20 @@ output "sql_server_fully_qualified_domain_name" {
   description = "The fully qualified domain name of the SQL Server."
   value       = module.sql_server.sql_server_fully_qualified_domain_name
 }
+
+output "created_database_ids" {
+  description = "Database IDs created by the SQL Database module"
+  value       = module.sql_databases.database_ids    # Accessing database_ids from the module
+}
+
+# Capture and output the database names created by the module
+output "created_database_names" {
+  description = "Database Names created by the SQL Database module"
+  value       = module.sql_databases.database_names  # Accessing database_names from the module
+}
+
+# Capture and output the FQDNs of the databases created by the module
+output "created_database_fqdns" {
+  description = "Database FQDNs created by the SQL Database module"
+  value       = module.sql_databases.database_fqdns  # Accessing database_fqdns from the module
+}

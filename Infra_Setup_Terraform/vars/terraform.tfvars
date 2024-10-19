@@ -24,3 +24,15 @@ sql_server_name = "my-sql-solunistresearch-server"
 
 administrator_login = "solunistresearch"
 administrator_object_id = "fd92d0ef-f590-4784-817a-ea8ad99d6f98"
+
+
+databases = {
+  "solunistdb1" = {
+    collation = "SQL_Latin1_General_CP1_CI_AS"
+    edition   = "Basic"
+  }
+  "solunistdb2" = {
+    collation = null
+    edition   = "Standard"
+  }
+}
