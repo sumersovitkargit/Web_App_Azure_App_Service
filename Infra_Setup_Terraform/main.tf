@@ -31,14 +31,25 @@ module "resource_group" {
 }
 
 module "app_service_plan" {
-  source = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//App_Service_Plan?ref=main"
+  source = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//App_Service_Windows?ref=main"
   #depends_on = [module.resource_group]
   # Mandatory variables
   name                = var.app_service_plan_name
   location            = var.location
   os_type             = var.os_type
-  resource_group_name = var.resource_group_name
+  resource_group_name = module.resource_group.resource_group_name
   sku_name            = var.sku_name
   tags                         = var.tags_asp
+ 
+}
+
+module "azurerm_windows_web_app" {
+  source = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//App_Service_Plan?ref=main"
+  #depends_on = [module.resource_group, module.app_service_plan]
+  # Mandatory variables
+  name                = var.app_service_name
+  location            = var.location
+  resource_group_name = module.resource_group.resource_group_name
+  service_plan_id     = module.app_service_plan.app_service_plan_id
  
 }
