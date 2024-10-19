@@ -20,6 +20,7 @@ app_service_name = "my-windows-web-app"
 app_insights_name = "my-app_insights-web-app"
 application_type = "web"
 identity_name = "my-Identity"
+sql_server_name = "my-sql-server
 
 administrator_login = "solunistresearch"
 administrator_object_id = "fd92d0ef-f590-4784-817a-ea8ad99d6f98"

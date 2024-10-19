@@ -80,7 +80,3 @@ variable "administrator_object_id" {
   type        = string
 }
 
-variable "sql_server_name" {
-  description = "The name of the Azure SQL Server."
-  type        = string
-}
