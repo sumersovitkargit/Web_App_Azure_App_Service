@@ -49,3 +49,13 @@ variable "app_service_name" {
   description = "The name of the Windows Web App"
   type        = string
 }
+
+variable "app_insights_name" {
+  description = "The name of the Application Insights resource."
+  type        = string
+}
+
+variable "application_type" {
+  description = "The name of the Resource Group where Application Insights will be created."
+  type        = string
+}
