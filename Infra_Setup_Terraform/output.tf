@@ -48,9 +48,3 @@ output "created_database_names" {
   description = "Database Names created by the SQL Database module"
   value       = module.sql_databases.database_names  # Accessing database_names from the module
 }
-
-# Capture and output the FQDNs of the databases created by the module
-output "created_database_fqdns" {
-  description = "Database FQDNs created by the SQL Database module"
-  value       = module.sql_databases.database_fqdns  # Accessing database_fqdns from the module
-}
