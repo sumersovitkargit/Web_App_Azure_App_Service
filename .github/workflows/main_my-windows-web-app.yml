@@ -4,14 +4,17 @@
 name: Build and deploy ASP app to Azure Web App - my-windows-web-app
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+    inputs:
+      environment-name:
+        type: choice
+        description: 'Environment'
+        required: true
+        options: ['dev']
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v4
@@ -23,24 +26,24 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
 
       - name: Restore NuGet packages
-        run: nuget restore
+        run: nuget restore website/SimpleWebApp/SimpleWebApp.sln  # Adjust the path to your solution file
 
       - name: Publish to folder
-        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+        run: msbuild website/SimpleWebApp/SimpleWebApp.csproj /nologo /verbosity:m /t:Build /p:Configuration=Release /p:OutputPath=./published  # Adjust the path to your .csproj file
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: ASP-app
-          path: '/published/**'
+          path: './published/**'  # Use the correct path for your published files
 
   deploy:
-    runs-on: windows-latest
+    runs-on: self-hosted
     needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -51,7 +54,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'my-windows-web-app'
+          app-name: 'my-windows-web-app'  # Replace with your Azure Web App name
           slot-name: 'Production'
-          package: .
+          package: .  # The current directory where the artifact was downloaded
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9E75333E2567476DB102191776606DFF }}
