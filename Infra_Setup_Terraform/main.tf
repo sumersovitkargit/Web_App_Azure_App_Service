@@ -82,3 +82,11 @@ module "azurerm_windows_web_app" {
 
 }
 
+module "sql_databases" {
+  source = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//sql_db?ref=main"               # Path to your SQL Database module
+  server_id  = module.sql_server.sql_server_id    # Reference to the SQL Server ID
+  location   = var.location                          # Location of the databases
+
+  databases  = var.databases                         # Pass the databases variable from the tfvars file
+}
+
