@@ -1,9 +1,8 @@
 ![Description of Image](Web_App_Azure.png)
 
 # Site_OutPut/Database Conenctivity
-![Description of Image](website.png)
 
-| ![Site Output](Web_App_Azure.png) | ![Database Connectivity](website.png) |
+| ![Site Output](website.png) | ![Database Connectivity](db.png) |
 |:-------------------------------------:|:----------------------------------------:|
 |             Site Output               |         Database Connectivity             |
 
