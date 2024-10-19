@@ -52,6 +52,13 @@ module "app_insights" {
   application_type    = var.application_type
 }
 
+module "user_assigned_identity" {
+  source              = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//User_managed_Identity?ref=main"
+  identity_name      = var.identity_name
+  resource_group_name = module.resource_group.resource_group_name
+  location           = var.location
+}
+
 
 
 module "azurerm_windows_web_app" {

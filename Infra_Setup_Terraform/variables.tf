@@ -59,3 +59,8 @@ variable "application_type" {
   description = "The name of the Resource Group where Application Insights will be created."
   type        = string
 }
+
+variable "identity_name" {
+  description = "The name of the Application Insights resource."
+  type        = string
+}
