@@ -19,3 +19,4 @@ app_service_name = "my-windows-web-app"
 
 app_insights_name = "my-app_insights-web-app"
 application_type = "web"
+identity_name = "my-Identity"
