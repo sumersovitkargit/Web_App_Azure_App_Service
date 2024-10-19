@@ -10,8 +10,10 @@ output "resource_group_name" {
 
 output "app_insights_instrumentation_key" {
   value = module.app_insights.instrumentation_key
+  sensitive = true
 }
 
 output "app_insights_connection_string" {
   value = module.app_insights.connection_string
+  sensitive = true
 }
