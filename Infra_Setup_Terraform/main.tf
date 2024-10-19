@@ -59,8 +59,20 @@ module "user_assigned_identity" {
   location           = var.location
 }
 
+module "azurerm_mssql_server" "sql_server" {
+  source                       = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//SQL_Server_and_DB?ref=main"      
+  name                         = var.sql_server_name
+  resource_group_name          = module.resource_group.resource_group_name
+  location                     = var.location
+  version                      = "12.0"
 
 
+  azuread_administrator {
+    login                         = var.administrator_login
+    object_id                    = var.administrator_object_id
+    azuread_authentication_only   = true
+  }
+}
 module "azurerm_windows_web_app" {
   source = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//App_Service_Windows?ref=main"
   #depends_on = [module.resource_group, module.app_service_plan, module.app_insights]
