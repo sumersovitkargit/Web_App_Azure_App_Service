@@ -51,8 +51,5 @@ module "azurerm_windows_web_app" {
   location            = var.location
   resource_group_name = module.resource_group.resource_group_name
   service_plan_id     = module.app_service_plan.app_service_plan_id
-  site_config {
-    # Add specific site configuration options here
-  }
 
 }
