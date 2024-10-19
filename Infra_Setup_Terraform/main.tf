@@ -60,7 +60,7 @@ module "user_assigned_identity" {
 }
 
 module "sql_server" {
-  source                       = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//SQL_Server_DB?ref=main"      
+  source              = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//Sql_Server?ref=main"
   name                         = var.sql_server_name
   resource_group_name          = module.resource_group.resource_group_name
   location                     = var.location
