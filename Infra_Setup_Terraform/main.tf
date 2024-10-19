@@ -64,9 +64,9 @@ module "sql_server" {
   sql_server_name             = var.sql_server_name
   resource_group_name          = module.resource_group.resource_group_name
   location                     = var.location
-  azuread_administrator_login = var.administrator_login
+  administrator_login = var.administrator_login
   administrator_object_id     = var.administrator_object_id
-  azuread_authentication_only = true 
+  
 }
 
 module "azurerm_windows_web_app" {
