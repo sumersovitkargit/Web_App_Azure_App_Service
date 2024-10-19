@@ -43,13 +43,27 @@ module "app_service_plan" {
  
 }
 
+##App Insights
+module "app_insights" {
+  source              = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//App_Insight?ref=main"
+  name                = var.app_insights_name
+  location            = var.location
+  resource_group_name = module.resource_group.resource_group_name
+  application_type    = var.application_type
+}
+
+
+
 module "azurerm_windows_web_app" {
   source = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//App_Service_Windows?ref=main"
-  #depends_on = [module.resource_group, module.app_service_plan]
+  #depends_on = [module.resource_group, module.app_service_plan, module.app_insights]
   # Mandatory variables
   name                = var.app_service_name
   location            = var.location
   resource_group_name = module.resource_group.resource_group_name
   service_plan_id     = module.app_service_plan.app_service_plan_id
+  app_insights_instrumentation_key = module.app_insights.instrumentation_key
+  app_insights_connection_string   = module.app_insights.connection_string
 
 }
+
