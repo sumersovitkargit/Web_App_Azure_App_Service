@@ -59,7 +59,7 @@ module "user_assigned_identity" {
   location           = var.location
 }
 
-module "azurerm_mssql_server" "sql_server" {
+module "sql_server" {
   source                       = "git::https://github.com/sumersovitkargit/Central_Terraform_Modules.git//SQL_Server_and_DB?ref=main"      
   name                         = var.sql_server_name
   resource_group_name          = module.resource_group.resource_group_name
